@@ -53,10 +53,8 @@ public class DriveSystem {
      *      s.t. - all motor commands are in the range [-1.0, 1.0]
      *             drive is positive in the forward direction
      *             turn is positive in the CCW direction
-     * 
-     * It is encouraged that you re-derive the equations to convince yourself that they are true.
      */
     public void update() {
-
+        // It is encouraged that you re-derive the equations to convince yourself that they are true.
     }
 }
