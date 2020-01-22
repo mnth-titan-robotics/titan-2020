@@ -16,9 +16,13 @@ public class DriveSystem {
     public DriveSystem() {
         this._motorFL = new Talon(RobotConstants.MOTOR_CHANNEL_FL);
         this._motorFR = new Talon(RobotConstants.MOTOR_CHANNEL_FR);
-        this._motorRL = new Talon(RobotConstants.MOTOR_INVERTED_FL);
-        this._motorRR = new Talon(RobotConstants.MOTOR_INVERTED_RR);
-
+        this._motorRL = new Talon(RobotConstants.MOTOR_CHANNEL_RL);
+        this._motorRR = new Talon(RobotConstants.MOTOR_CHANNEL_RR);
+        
+        this._motorFL.setInverted(RobotConstants.MOTOR_DRIVE_INVERT_L);
+        this._motorFR.setInverted(RobotConstants.MOTOR_DRIVE_INVERT_R);
+        this._motorRL.setInverted(RobotConstants.MOTOR_DRIVE_INVERT_L);
+        this._motorRR.setInverted(RobotConstants.MOTOR_DRIVE_INVERT_R);
         this.reset();
     }
     public void reset() {
@@ -32,15 +36,15 @@ public class DriveSystem {
         this._driveCmd = driveCmd;
         this._turnCmd = turnCmd;
     }
-    //left is drive + turn
-    //right is drive - turn
+    //left is drive - turn
+    //right is drive + turn
     public void update() {
-        double leftTrn = MaxCalc.limit(this._driveCmd + this._turnCmd,-1.0, 1.0);
-        double rightTrn = MaxCalc.limit(this._driveCmd - this._turnCmd,-1.0, 1.0);
+        double leftTrn = Util.limit(this._driveCmd - this._turnCmd,-1.0, 1.0);
+        double rightTrn = Util.limit(this._driveCmd + this._turnCmd,-1.0, 1.0);
 
         this._motorFL.set(leftTrn);
-        this._motorFR.set(leftTrn);
-        this._motorRL.set(rightTrn);
+        this._motorFR.set(rightTrn);
+        this._motorRL.set(leftTrn);
         this._motorRR.set(rightTrn);
     }
 }

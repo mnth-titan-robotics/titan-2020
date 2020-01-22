@@ -1,7 +1,7 @@
 package frc.robot;
 
 //Recycled Class from 2019 to prevent false values being inputed into the motor controller.
-public class MaxCalc {
+public class Util {
     public static double limit(double value, double min, double max)
     {
         if(value >= max)

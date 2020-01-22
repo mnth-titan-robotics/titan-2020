@@ -9,6 +9,7 @@ public class OperatorInterface {
     private Joystick _pilotJoy;
     private Joystick _copilotJoy;
 
+    
     /**
      * Default constructor
      * 
