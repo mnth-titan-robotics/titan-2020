@@ -42,26 +42,15 @@ public class DriveSystem {
      //@param drive desired forward/backward command for the robot in the range [-1.0, 1.0]
      //@param turn desired left/right command for the robot in the range [-1.0, 1.0]
 
-    public void setCommands(double drive, double turn) {
-        this._drive = drive;
-        this._turn = turn;
+    public void setCommands(double driveCmd, double turnCmd) {
+        this._driveCmd = drive;
+        this._turnCmd = turn;
     }
-
-    /**
-     * Commands the motors based on the most recently provided drive and turn commands. The
-     * output for each motor on the robot are as follows:
-     * 
-     *      left side: (drive - turn)
-     *      right side: (drive + turn)
-     * 
-     *      s.t. - all motor commands are in the range [-1.0, 1.0]
-     *             drive is positive in the forward direction
-     *             turn is positive in the CCW direction   
-     */
+    //left is drive + turn
+    //right is drive - turn
     public void update() {
-        // It is encouraged that you re-derive the equations to convince yourself that they are true.
-        double leftTrn = MaxCalc(this._drive + this._turn,-1.0, 1.0);
-        double rightTrn = MaxCalc(this._drive - this._turn,-1.0, 1.0);
+        double leftTrn = MaxCalc(this._driveCmd + this._turnCmd,-1.0, 1.0);
+        double rightTrn = MaxCalc(this._driveCmd - this._turnCmd,-1.0, 1.0);
 
         this._motorFL.set(left);
         this._motorFR.set(left);
