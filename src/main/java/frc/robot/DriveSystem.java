@@ -17,7 +17,7 @@ public class DriveSystem {
         this._motorFL = new Talon(RobotConstants.MOTOR_CHANNEL_FL);
         this._motorFR = new Talon(RobotConstants.MOTOR_CHANNEL_FR);
         this._motorRL = new Talon(RobotConstants.MOTOR_INVERTED_FL);
-        this._motorRR = new Talon(RobotConstants.MOTOR_INVERTED_FR);
+        this._motorRR = new Talon(RobotConstants.MOTOR_INVERTED_RR);
 
         this.reset();
     }
