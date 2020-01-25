@@ -61,6 +61,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autoSelected = m_chooser.getSelected();
+    
     // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
     System.out.println("Auto selected: " + m_autoSelected);
   }
@@ -80,7 +81,9 @@ public class Robot extends TimedRobot {
         break;
     }
   }
-
+  @Override
+  public void teleopInit() {
+  }
   /**
    * This function is called periodically during operator control.
    */
@@ -92,6 +95,9 @@ public class Robot extends TimedRobot {
    * This function is called periodically during test mode.
    */
   @Override
-  public void testPeriodic() {
+  public void disabledInit() {
+  }
+  @Override
+  public void disabledPeriodic() {
   }
 }
