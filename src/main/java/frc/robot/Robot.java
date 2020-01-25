@@ -19,22 +19,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
-
+  private DriveSystem _drivesys;
+  private OperatorInterface _opFace;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    this._drivesys = new DriveSystem();
+    this._opFace = new OperatorInterface();
   }
-
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -60,10 +55,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+    this._drivesys.reset();
+    this._opFace.reset();
   }
 
   /**
@@ -71,24 +64,23 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
+    this._drivesys.setCmds(0.0, 0.0);
+    this._drivesys.update();
     }
   }
   @Override
   public void teleopInit() {
+    this._drivesys.reset();
+    this._opFace.reset();
   }
   /**
    * This function is called periodically during operator control.
    */
   @Override
   public void teleopPeriodic() {
+    this._opFace.update();
+    this._drivesys.setCmds(this._opFace.getDriveCmd(), this._opFace.getTurnCmd());
+    this._drivesys.update();
   }
 
   /**
@@ -96,8 +88,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    this._drivesys.reset();
+    this._opFace.reset();
   }
   @Override
   public void disabledPeriodic() {
+    this._drivesys.setCmds(0.0, 0.0);
+    this._drivesys.update();
   }
 }
