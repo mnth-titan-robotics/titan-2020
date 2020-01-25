@@ -18,7 +18,6 @@ public class RobotConstants {
     public static final int AXIS_TURN = 4;
 
     //DeadBand
-    public static final double DeadBandP = 0.2;
-    public static final double DeadBandN = -0.2;
+    public static final double DeadBand = 0.2;
 }
     
