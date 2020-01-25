@@ -60,8 +60,18 @@ public class OperatorInterface {
      * the joysticks.
      */
     public void update() {
-        this._driveCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE);
-        this._turnCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
+        if(-this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE) <= RobotConstants.DeadBand){
+            this._driveCmd = (0.0);
+        }
+        else{
+            this._driveCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE);
+        }
+        if(-this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN) <= RobotConstants.DeadBand){
+            this._turnCmd = (0.0);
+        }
+        else{
+            this._turnCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
+        }
 
         //We will be inverting the RawAxis to set a standard for how the robot drives:
         //By default forward on the joystick is negative, and we want that to be positive, same with left and right. We want them reversed
