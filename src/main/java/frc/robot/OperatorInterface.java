@@ -21,14 +21,18 @@ public class OperatorInterface {
      * Also sets the default state of each variable to 0.0 or false, depending on the type.
      */
     public OperatorInterface() {
+        this._pilotJoy = new Joystick(RobotConstants.JOYSTICK_PORT_PILOT);
+        this._copilotJoy = new Joystick(RobotConstants.JOYSTICK_PORT_COPILOT);
 
+        this.reset();
     }
 
     /**
      * Sets all variables back to their default state.
      */
     public void reset() {
-
+        this._driveCmd = 0.0;
+        this._turnCmd = 0.0;
     }
 
     /**
@@ -38,7 +42,7 @@ public class OperatorInterface {
      * @return desired forward/backward command for the robot
      */
     public double getDriveCmd() {
-        return 0.0;
+        return this._driveCmd;
     }
 
     /**
@@ -48,7 +52,7 @@ public class OperatorInterface {
      * @return desired left/right turn command for the robot
      */
     public double getTurnCmd() {
-        return 0.0;
+        return this._turnCmd;
     }
 
     /**
@@ -56,18 +60,12 @@ public class OperatorInterface {
      * the joysticks.
      */
     public void update() {
-        // For now, just worry about updating the drive and turn commands. Keep in mind that we
-        // will be using the following conventions:
-        //
+        this._driveCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE);
+        this._turnCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
         //      forward is positive for drive commands
         //      CCW is positive for turn commands
-        //
         // The joysticks we will be using are as follows (both on the pilot controller):
-        //
         //      drive - left stick y-axis
         //      turn - right stick x-axis
-        //
-        // You may need to do some tinkering (or look at last year's code) to reference the correct
-        // axes.
     }
 }
