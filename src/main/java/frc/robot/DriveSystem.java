@@ -1,23 +1,23 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 
 public class DriveSystem {
     private double _driveCmd;
     private double _turnCmd;
     //Initialization of variables
-    private Talon _motorFL;
-    private Talon _motorFR;
-    private Talon _motorRL;
-    private Talon _motorRR;
+    private Victor _motorFL;
+    private Victor _motorFR;
+    private Victor _motorRL;
+    private Victor _motorRR;
 
     //MOTOR_CHANNEL_FL, MOTOR_CHANNEL_FR, ...
     //MOTOR_INVERTED_FL, MOTOR_INVERTED_FR, ...
     public DriveSystem() {
-        this._motorFL = new Talon(RobotConstants.MOTOR_CHANNEL_FL);
-        this._motorFR = new Talon(RobotConstants.MOTOR_CHANNEL_FR);
-        this._motorRL = new Talon(RobotConstants.MOTOR_CHANNEL_RL);
-        this._motorRR = new Talon(RobotConstants.MOTOR_CHANNEL_RR);
+        this._motorFL = new Victor(RobotConstants.MOTOR_CHANNEL_FL);
+        this._motorFR = new Victor(RobotConstants.MOTOR_CHANNEL_FR);
+        this._motorRL = new Victor(RobotConstants.MOTOR_CHANNEL_RL);
+        this._motorRR = new Victor(RobotConstants.MOTOR_CHANNEL_RR);
         
         this._motorFL.setInverted(RobotConstants.MOTOR_DRIVE_INVERT_L);
         this._motorFR.setInverted(RobotConstants.MOTOR_DRIVE_INVERT_R);

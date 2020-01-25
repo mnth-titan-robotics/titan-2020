@@ -60,13 +60,13 @@ public class OperatorInterface {
      * the joysticks.
      */
     public void update() {
-        if(-this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE) <= RobotConstants.DeadBand){
+        if(-this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE) <= RobotConstants.DeadBandP || this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE) >= RobotConstants.DeadBandN){
             this._driveCmd = (0.0);
         }
         else{
             this._driveCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE);
         }
-        if(-this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN) <= RobotConstants.DeadBand){
+        if(-this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN) <= RobotConstants.DeadBandP || this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN) >= RobotConstants.DeadBandN){
             this._turnCmd = (0.0);
         }
         else{
