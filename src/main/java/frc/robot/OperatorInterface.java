@@ -70,7 +70,7 @@ public class OperatorInterface {
             this._turnCmd = (0.0);
         }
         else{
-            this._driveCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
+            this._turnCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
         }
     }
 
