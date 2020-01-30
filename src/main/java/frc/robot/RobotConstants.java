@@ -16,4 +16,8 @@ public class RobotConstants {
 
     public static final int AXIS_DRIVE = 1;
     public static final int AXIS_TURN = 4;
+
+    //DeadBand
+    public static final double DEADBAND = 0.2;
 }
+    
