@@ -10,7 +10,7 @@ while True:
     lower_yel = np.array([20,100,100])
     upper_yel = np.array([30,255,255])
     #Mask filters for yellow without adding color to the view
-    mask = cv2.inRange(hsv, lower_yel, upper_yel)
+    mask = cv2.inRange(hsv, lower_yel, upper_yel)   
     res = cv2.bitwise_and(frame,frame, mask= mask)
     #Res is adding defualt yellow to filtered objects
 #    edges = cv2.Canny(res,100,200)
@@ -34,6 +34,7 @@ while True:
     for(i,cnt) in enumerate(sortedcontours):
         (x,y),radius = cv2.minEnclosingCircle(cnt)
     mediancopcop = cv2.medianBlur(mediancop,15)
+
     cv2.imshow('median blur copy copy', mediancopcop)
     cv2.imshow('Median Blur',median)
 #    cv2.imshow('Video', frame)
