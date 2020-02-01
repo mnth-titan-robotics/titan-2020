@@ -28,12 +28,19 @@ while True:
     #    (x,y),radius = cv2.minEnclosingCircle(cnt)
 
     cnt, hierarchy = cv2.findContours(mask, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-    sortedcontours = sorted(cnt, key = cv2.contourArea, reverse = True)
+    cnt = sorted(cnt, key = cv2.contourArea, reverse = True)
     mediancop = median.copy()
-    cv2.drawContours(mediancop,cnt,-1,(0,0,255), 3)
-    for(i,cnt) in enumerate(sortedcontours):
-        (x,y),radius = cv2.minEnclosingCircle(cnt)
+    cv2.drawContours(mediancop,cnt,-1,(0,0,255), 2)
+    #for(i,cnt) in enumerate(sortedcontours):
+     #   (x,y),radius = cv2.minEnclosingCircle(cnt)
+
     mediancopcop = cv2.medianBlur(mediancop,15)
+    
+    c_0 = cnt[0]
+    M = cv2.moments(c_0)
+
+    #cx = int(M['m10'] / M['m00'])
+    #cy = int(M['m01'] / M['m00'])
 
     cv2.imshow('median blur copy copy', mediancopcop)
     cv2.imshow('Median Blur',median)
