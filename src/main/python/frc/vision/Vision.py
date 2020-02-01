@@ -35,20 +35,22 @@ while True:
      #   (x,y),radius = cv2.minEnclosingCircle(cnt)
 
     mediancopcop = cv2.medianBlur(mediancop,15)
-    
-    c_0 = cnt[0]
-    M = cv2.moments(c_0)
+    if len(cnt) == 0:
+        print("No Contours")
+    else:
+        c_0 = cnt[0]
+        M = cv2.moments(c_0) 
+        cx = int(M['m10'] / M['m00'])
+        cy = int(M['m01'] / M['m00'])
+        cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=1, lineType=8, shift=0)
 
-    #cx = int(M['m10'] / M['m00'])
-    #cy = int(M['m01'] / M['m00'])
-
-    cv2.imshow('median blur copy copy', mediancopcop)
+    cv2.imshow('median blur Final', mediancopcop)
     cv2.imshow('Median Blur',median)
 #    cv2.imshow('Video', frame)
 #    cv2.imshow('edges',edges)
 #    cv2.imshow('mask', mask)
 #    cv2.imshow('res', res)
-    cv2.imshow('mediancopy', mediancop)
+    cv2.imshow('median copy', mediancop)
 
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
