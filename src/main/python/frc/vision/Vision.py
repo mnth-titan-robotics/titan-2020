@@ -34,9 +34,12 @@ while True:
     else:
         c_0 = copyCnt[0]
         M = cv2.moments(c_0)
-        cx = int(M['m10'] / M['m00'])
-        cy = int(M['m01'] / M['m00'])
-        cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=1, lineType=8, shift=0)
+        if M["m00"] != 0:
+            cx = int(M['m10'] / M['m00'])
+            cy = int(M['m01'] / M['m00'])
+            cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=1, lineType=8, shift=0)
+        else:
+            cx, cy = 0,0
 
     cv2.imshow('median blur Final', mediancopcop)
     cv2.imshow('Median Blur',median)
