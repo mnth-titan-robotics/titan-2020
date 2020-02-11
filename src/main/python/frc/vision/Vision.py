@@ -8,11 +8,13 @@ cap = cv2.VideoCapture(0)
 while True:
     _, frame = cap.read()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-    lower_yel = np.array([20,100,100])
-    upper_yel = np.array([30,255,255])
+    hsl = cv2.cvtColor(frame, cv2.COLOR_BGR2HLS)
+    cv2.imshow('HSL', hsl)
+    #BGR Values V V V
+    lower_yel = np.array([20,0,100])
+    upper_yel = np.array([30,150,255])
     #Mask filters for yellow without adding color to the view
-    mask = cv2.inRange(hsv, lower_yel, upper_yel)   
+    mask = cv2.inRange(hsl, lower_yel, upper_yel)   
     res = cv2.bitwise_and(frame,frame, mask= mask)
     #Res is adding defualt yellow to filtered objects
 #    edges = cv2.Canny(res,100,200)
@@ -37,7 +39,7 @@ while True:
         if M["m00"] != 0:
             cx = int(M['m10'] / M['m00'])
             cy = int(M['m01'] / M['m00'])
-            cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=1, lineType=8, shift=0)
+            cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
 
