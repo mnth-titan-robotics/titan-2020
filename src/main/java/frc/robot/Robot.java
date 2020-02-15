@@ -64,7 +64,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    this._drivesys.setCommands(0.0, 0.0);
+    double balx = 0.0; 
+    double x = 0.0;
+    double y = 0.0;
+    AutonSearch.middle(balx, x);
+    AutonSearch.interpret(x, y);
+    this._drivesys.setCommands(0.0, y);
+    if(y == 0.0)
+    {
+      this._drivesys.setCommands(0.1, 0.0);
+    }
     this._drivesys.update();
     }
   @Override
