@@ -19,5 +19,9 @@ public class RobotConstants {
 
     //DeadBand
     public static final double DEADBAND = 0.2;
+
+    //Vision
+    public static final double XLOWER = 300;
+    public static final double XUPPER = 350;
 }
     
