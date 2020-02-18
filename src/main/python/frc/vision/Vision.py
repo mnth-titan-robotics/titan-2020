@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import logging
-import pynetworktables
+import networktables
 
 #cv2 is OpenCV
 cap = cv2.VideoCapture(0)
@@ -46,6 +46,9 @@ while True:
         else:
             cx, cy = 0,0
     #pynetworktables. (INSERT NETWORK TABLES CODE HERE)
+    networktables.initialize(server='10.xx.xx.2')
+    networktables.addConnectionListener(connectionListener, immediateNotify=True)
+    
     cv2.imshow('median blur Final', mediancopcop)
     cv2.imshow('Median Blur',median)
     cv2.imshow('Video', frame)
