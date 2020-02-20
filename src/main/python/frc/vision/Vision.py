@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import logging
 import pynetworktables
 
 #cv2 is OpenCV
