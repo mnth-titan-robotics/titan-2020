@@ -23,6 +23,7 @@ public class Robot extends TimedRobot {
   private DriveSystem _drivesys;
   private OperatorInterface _opFace;
   private Intake _intake;
+  public NetworkTable visionTable;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.

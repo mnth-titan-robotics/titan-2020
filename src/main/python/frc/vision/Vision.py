@@ -1,6 +1,10 @@
 import cv2
 import numpy as np
-#import networktables
+from networktables import NetworkTables
+
+NetworkTables.initialize(server='10.27.89.2')
+sd = NetworkTables.getTable("visionTable")
+#sd.getTable
 
 #cv2 is OpenCV
 cap = cv2.VideoCapture(0)
@@ -8,7 +12,6 @@ while True:
     _, frame = cap.read()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     hsl = cv2.cvtColor(frame, cv2.COLOR_BGR2HLS)
-    cv2.imshow('HSL', hsl)
     #BGR Values V V V
     lower_yel = np.array([20,0,100])
     upper_yel = np.array([30,150,255])
@@ -16,7 +19,6 @@ while True:
     mask = cv2.inRange(hsl, lower_yel, upper_yel)   
     res = cv2.bitwise_and(frame,frame, mask= mask)
     #Res is adding defualt yellow to filtered objects
-    #Edges maybe for the future when we wanna auto score
     median = cv2.medianBlur(res,15)
     #Medianblur on the mask is the most smooth transform
 
@@ -43,15 +45,7 @@ while True:
             cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
-    #pynetworktables. (INSERT NETWORK TABLES CODE HERE)
-    #networktables.initialize(server='10.27.89.2')
-    #networktables.addConnectionListener(connectionListener, immediateNotify=True)
-    
-    cv2.imshow('median blur Final', mediancopcop)
-    cv2.imshow('Median Blur',median)
-    cv2.imshow('Video', frame)
-
-    cv2.imshow('median copy', mediancop)
+        sd.putNumber('visionTable', cx)
 
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
