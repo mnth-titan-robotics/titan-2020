@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OperatorInterface {
     private double _driveCmd;
     private double _turnCmd;
+    private double _upCmd;
+    private double _downCmd;
 
     private Joystick _pilotJoy;
     private Joystick _copilotJoy;
@@ -33,6 +35,8 @@ public class OperatorInterface {
     public void reset() {
         this._driveCmd = 0.0;
         this._turnCmd = 0.0;
+        this._upCmd = 0.0;
+        this._downCmd = 0.0;
     }
 
     /**
@@ -51,10 +55,18 @@ public class OperatorInterface {
      * 
      * @return desired left/right turn command for the robot
      */
+
     public double getTurnCmd() {
         return this._turnCmd;
     }
 
+    public double getUpCmd() {
+        return this._upCmd;
+    }
+
+    public double getDownCmd() {
+        return this._downCmd;
+    }
     /**
      * Updates the member variables of this class based on the input(s) they are associated with on
      * the joysticks.
@@ -62,6 +74,9 @@ public class OperatorInterface {
     public void update() {
         this._driveCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE);
         this._turnCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
+        this._upCmd = this._copilotJoy.getRawAxis(RobotConstants.AXIS_UPP);
+        this._downCmd = this._copilotJoy.getRawAxis(RobotConstants.AXIS_LOW);
+        
         if(Math.abs(this._driveCmd) < RobotConstants.DEADBAND){
             this._driveCmd = (0.0);
         }
@@ -73,6 +88,18 @@ public class OperatorInterface {
         }
         else{
             this._turnCmd = this._turnCmd;
+        }
+        if(Math.abs(this._upCmd) < RobotConstants.DEADBAND){
+            this._upCmd = (0.0);
+        }
+        else{
+            this._upCmd = this._upCmd;
+        }
+        if(Math.abs(this._downCmd) < RobotConstants.DEADBAND){
+            this._downCmd = (0.0);
+        }
+        else{
+            this._downCmd = this._downCmd;
         }
     }
 

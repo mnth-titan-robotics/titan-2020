@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
   private DriveSystem _drivesys;
   private OperatorInterface _opFace;
+  private Intake _intake;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -29,6 +31,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     this._drivesys = new DriveSystem();
     this._opFace = new OperatorInterface();
+    this._intake = new Intake();
   }
   /**
    * This function is called every robot packet, no matter the mode. Use
@@ -88,7 +91,9 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     this._opFace.update();
     this._drivesys.setCommands(this._opFace.getDriveCmd(), this._opFace.getTurnCmd());
+    this._intake.setCommands(this._opFace.getUpCmd(), this._opFace.getDownCmd());
     this._drivesys.update();
+    this._intake.update();
   }
 
   /**
@@ -98,10 +103,13 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     this._drivesys.reset();
     this._opFace.reset();
+    this._intake.reset();
   }
   @Override
   public void disabledPeriodic() {
     this._drivesys.setCommands(0.0, 0.0);
     this._drivesys.update();
+    this._intake.setCommands(0.0, 0.0);
+    this._intake.update();
   }
 }

@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import networktables
+#import networktables
 
 #cv2 is OpenCV
 cap = cv2.VideoCapture(0)
@@ -16,7 +16,6 @@ while True:
     mask = cv2.inRange(hsl, lower_yel, upper_yel)   
     res = cv2.bitwise_and(frame,frame, mask= mask)
     #Res is adding defualt yellow to filtered objects
-    #   edges = cv2.Canny(res,100,200)
     #Edges maybe for the future when we wanna auto score
     median = cv2.medianBlur(res,15)
     #Medianblur on the mask is the most smooth transform
@@ -45,8 +44,8 @@ while True:
         else:
             cx, cy = 0,0
     #pynetworktables. (INSERT NETWORK TABLES CODE HERE)
-    networktables.initialize(server='10.xx.xx.2')
-    networktables.addConnectionListener(connectionListener, immediateNotify=True)
+    #networktables.initialize(server='10.27.89.2')
+    #networktables.addConnectionListener(connectionListener, immediateNotify=True)
     
     cv2.imshow('median blur Final', mediancopcop)
     cv2.imshow('Median Blur',median)
