@@ -46,7 +46,7 @@ while True:
         else:
             cx, cy = 0,0
         sd.putNumber('visionTable', cx)
-
+    cv2.imshow('Final', mediancopcop)
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
