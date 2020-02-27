@@ -39,8 +39,8 @@ public class DriveSystem {
     //left is drive - turn
     //right is drive + turn
     public void update() {
-        double leftTrn = Util.limit(this._driveCmd - this._turnCmd,-1.0, 1.0);
-        double rightTrn = Util.limit(this._driveCmd + this._turnCmd,-1.0, 1.0);
+        double leftTrn = Util.limit(this._driveCmd - this._turnCmd,-0.5, 0.5);
+        double rightTrn = Util.limit(this._driveCmd + this._turnCmd,-0.5, 0.5);
 
         this._motorFL.set(leftTrn);
         this._motorFR.set(rightTrn);

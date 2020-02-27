@@ -11,8 +11,8 @@ public class RobotConstants {
     public static final boolean MOTOR_DRIVE_INVERT_R = true;
 
     //Intake
-    public static final int MOTOR_CHANNEL_UL = 8;
-    public static final int MOTOR_CHANNEL_UR = 9;
+    public static final int MOTOR_CHANNEL_UL = 7;
+    public static final int MOTOR_CHANNEL_UR = 8;
 
     public static final boolean MOTOR_VERT_INVERT_UL = false;
     public static final boolean MOTOR_VERT_INVERT_UR = false;

@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +26,7 @@ public class Robot extends TimedRobot {
   private OperatorInterface _opFace;
   private Intake _intake;
   public NetworkTable visionTable;
+  NetworkTableEntry xpos;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -33,8 +36,13 @@ public class Robot extends TimedRobot {
     this._drivesys = new DriveSystem();
     this._opFace = new OperatorInterface();
     this._intake = new Intake();
-    
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable visionTable = inst.getTable("FMSInfo");
+    xpos = inst.getEntry("cx");
   }
+  double x = 0.0;
+  double y = 0.0;
+  double balx = 0.0;
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -62,6 +70,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     this._drivesys.reset();
     this._opFace.reset();
+    this._intake.reset();
   }
 
   /**
@@ -69,9 +78,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    double balx = 0.0; 
-    double x = 0.0;
-    double y = 0.0;
+    xpos.setDouble(balx);
     AutonSearch.middle(balx, x);
     AutonSearch.interpret(x, y);
     this._drivesys.setCommands(0.0, y);
@@ -85,6 +92,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     this._drivesys.reset();
     this._opFace.reset();
+    this._intake.reset();
   }
   /**
    * This function is called periodically during operator control.

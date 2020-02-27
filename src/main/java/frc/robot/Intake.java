@@ -24,8 +24,8 @@ public class Intake {
         this._downCmd = downCmd;
     }
     public void update() {
-        double upTrn = Util.limit(this._upCmd - this._downCmd,-1.0, 1.0);
-        double downTrn = Util.limit(this._upCmd + this._downCmd,-1.0, 1.0);
+        double upTrn = this._upCmd;
+        double downTrn = this._downCmd;
 
         this._motorUL.set(upTrn);
         this._motorUR.set(downTrn);
