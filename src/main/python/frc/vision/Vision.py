@@ -1,10 +1,11 @@
 import cv2
 import numpy as np
 from networktables import NetworkTables
+#from time import sleep
 
-NetworkTables.initialize(server='10.27.89.2')
-sd = NetworkTables.getTable("FMSInfo")
-#sd.getTable
+#sleep(0.1)
+
+raspTable = NetworkTables.getTable("Rasp")
 
 #cv2 is OpenCV
 cap = cv2.VideoCapture(0)
@@ -45,7 +46,7 @@ while True:
             cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
-        sd.putNumber('FMSInfo', cx)
+        rasp.putNumber('X value', cx)
     cv2.imshow('Final', mediancopcop)
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
