@@ -13,8 +13,8 @@ public class Intake {
         this._motorUL = new Victor(RobotConstants.MOTOR_CHANNEL_UL);
         this._motorUR = new Victor(RobotConstants.MOTOR_CHANNEL_UR);
 
-        this._motorUL.setInverted(RobotConstants.MOTOR_VERT_INVERT_L);
-        this._motorUR.setInverted(RobotConstants.MOTOR_VERT_INVERT_R);
+        this._motorUL.setInverted(RobotConstants.MOTOR_VERT_INVERT_UL);
+        this._motorUR.setInverted(RobotConstants.MOTOR_VERT_INVERT_UR);
     }
     public void reset() {
         this.setCommands(0.0, 0.0);
@@ -24,8 +24,8 @@ public class Intake {
         this._downCmd = downCmd;
     }
     public void update() {
-        double upTrn = Util.limit(this._upCmd - this._downCmd,-1.0, 1.0);
-        double downTrn = Util.limit(this._upCmd + this._downCmd,-1.0, 1.0);
+        double upTrn = this._upCmd;
+        double downTrn = this._downCmd;
 
         this._motorUL.set(upTrn);
         this._motorUR.set(downTrn);

@@ -11,11 +11,11 @@ public class RobotConstants {
     public static final boolean MOTOR_DRIVE_INVERT_R = true;
 
     //Intake
-    public static final int MOTOR_CHANNEL_UL = 6;
-    public static final int MOTOR_CHANNEL_UR = 7;
+    public static final int MOTOR_CHANNEL_UL = 7;
+    public static final int MOTOR_CHANNEL_UR = 8;
 
-    public static final boolean MOTOR_VERT_INVERT_L = false;
-    public static final boolean MOTOR_VERT_INVERT_R = true;
+    public static final boolean MOTOR_VERT_INVERT_UL = false;
+    public static final boolean MOTOR_VERT_INVERT_UR = false;
 
     //Operator Interface
     public static final int JOYSTICK_PORT_PILOT = 0;

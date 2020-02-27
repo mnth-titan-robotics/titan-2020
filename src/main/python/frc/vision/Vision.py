@@ -3,7 +3,12 @@ import numpy as np
 from networktables import NetworkTables
 
 NetworkTables.initialize(server='10.27.89.2')
+<<<<<<< HEAD
 sd = NetworkTables.getTable("visionTable")
+=======
+sd = NetworkTables.getTable("FMSInfo")
+#sd.getTable
+>>>>>>> 5da2995ed69574a2237bbdfb917c3d32e562d339
 
 #cv2 is OpenCV
 #When calling cv2 on the PI be sure to use python3 instead of pythen when launching
@@ -45,8 +50,8 @@ while True:
             cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
-        sd.putNumber('visionTable', cx)
-
+        sd.putNumber('FMSInfo', cx)
+    cv2.imshow('Final', mediancopcop)
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
