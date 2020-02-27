@@ -4,9 +4,9 @@ from networktables import NetworkTables
 
 NetworkTables.initialize(server='10.27.89.2')
 sd = NetworkTables.getTable("visionTable")
-#sd.getTable
 
 #cv2 is OpenCV
+#When calling cv2 on the PI be sure to use python3 instead of pythen when launching
 cap = cv2.VideoCapture(0)
 while True:
     _, frame = cap.read()
