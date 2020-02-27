@@ -3,11 +3,20 @@ import numpy as np
 from networktables import NetworkTables
 #from time import sleep
 
+<<<<<<< HEAD
 #sleep(0.1)
 
 raspTable = NetworkTables.getTable("Rasp")
+=======
+NetworkTables.initialize(server='10.27.89.2')
+<<<<<<< HEAD
+sd = NetworkTables.getTable("visionTable")
+=======
+sd = NetworkTables.getTable("FMSInfo")
+#sd.getTable
 
 #cv2 is OpenCV
+#When calling cv2 on the PI be sure to use python3 instead of pythen when launching
 cap = cv2.VideoCapture(0)
 while True:
     _, frame = cap.read()
