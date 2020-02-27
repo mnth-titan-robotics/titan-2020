@@ -25,10 +25,9 @@ public class Robot extends TimedRobot {
   private DriveSystem _drivesys;
   private OperatorInterface _opFace;
   private Intake _intake;
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("VisionTable");
+  NetworkTableInstance inst = NetworkTableInstance.getDefault();
+  NetworkTable table = inst.getTable("VisionTable");
   NetworkTableEntry xEntry = table.getEntry("cx");
-  double xval = xEntry.getDouble(0.0);
-
 
   /**
    * This function is run when the robot is first started up and should be

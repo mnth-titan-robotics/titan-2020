@@ -1,18 +1,14 @@
 import cv2
 import numpy as np
-from networktables import NetworkTables
+from networktables import NetworkTable
+from networktables import NetworkTableEntry
+from networktables import NetworkTablesInstance
 #from time import sleep
-
-<<<<<<< HEAD
+rasp = NetworkTablesInstance.create()
 #sleep(0.1)
-
-raspTable = NetworkTables.getTable("Rasp")
-=======
-NetworkTables.initialize(server='10.27.89.2')
-<<<<<<< HEAD
-sd = NetworkTables.getTable("visionTable")
-=======
-sd = NetworkTables.getTable("FMSInfo")
+table = NetworkTablesInstance.getDefault().getTable("VisionTable")
+NetworkTablesInstance.startServer()
+xEntry = NetworkTablesInstance.getEntry("cx")
 #sd.getTable
 
 #cv2 is OpenCV
@@ -55,7 +51,7 @@ while True:
             cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
-        rasp.putNumber('X value', cx)
+        xEntry.setDouble('xval', cx)
     cv2.imshow('Final', mediancopcop)
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
