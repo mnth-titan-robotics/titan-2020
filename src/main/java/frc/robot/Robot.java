@@ -26,10 +26,8 @@ public class Robot extends TimedRobot {
   private DriveSystem _drivesys;
   private OperatorInterface _opFace;
   private Intake _intake;
-
-  NetworkTableInstance inst = NetworkTableInstance.getDefault();
-  NetworkTable table = inst.getTable("VisionTable");
-  NetworkTableEntry xEntry = table.getEntry("cx");
+  
+  
 
   /**
    * This function is run when the robot is first started up and should be
@@ -80,14 +78,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    xEntry.setDouble(balx);
-    AutonSearch.middle(balx, x);
-    AutonSearch.interpret(x, y);
-    this._drivesys.setCommands(0.0, y);
-    if(y == 0.0)
-    {
-      this._drivesys.setCommands(0.2, 0.0);
-    }
+    //xEntry.setDouble(balx);
+    //AutonSearch.middle(balx, x);
+    //AutonSearch.interpret(x, y);
+    //this._drivesys.setCommands(0.0, y);
+    //if(y == 0.0)
+    //{
+     // this._drivesys.setCommands(0.2, 0.0);
+    //}
+    this._drivesys.setCommands(1.0, 0.0);
+    
     this._drivesys.update();
     }
   @Override

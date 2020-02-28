@@ -13,7 +13,7 @@ def connectionListener(connected,info):
     with cond:
         notified[0] = True
         cond.notify()
-NetworkTablesInstance.initialize(, server="10.27.89.2")
+contoursTable = NetworkTablesInstance.getDefault().getTable("/vision/contours")
 NetworkTablesInstance.addConnectionListener(connectionListener, immediateNotify=True)
 with cond:
     print("Waiting")
@@ -65,6 +65,7 @@ while True:
             cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
+        contoursTable.getEntry("cx").setDouble(cx)
         xEntry.setDouble('cx', cx)
     cv2.imshow('Final', mediancopcop)
     k = cv2.waitKey(5) & 0xFF
