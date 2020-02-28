@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
   private OperatorInterface _opFace;
   private Intake _intake;
   
-  
+
 
   /**
    * This function is run when the robot is first started up and should be
@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
     this._opFace = new OperatorInterface();
     this._intake = new Intake();
     CameraServer.getInstance().startAutomaticCapture();
+    NetworkTableInstance.getDefault().getTable("SmartDashboard");
   }
   double x = 0.0;
   double y = 0.0;

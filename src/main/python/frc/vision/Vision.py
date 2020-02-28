@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from networktables import NetworkTable
+from networktables import NetworkTables
 from networktables import NetworkTableEntry
 from networktables import NetworkTablesInstance
 import threading
@@ -8,22 +8,25 @@ import threading
 cond = threading.Condition()
 notified = [False]
 
-def connectionListener(connected,info):
-    print(info, '; Connected=%s' % connected)
-    with cond:
-        notified[0] = True
-        cond.notify()
-contoursTable = NetworkTablesInstance.getDefault().getTable("/vision/contours")
-NetworkTablesInstance.addConnectionListener(connectionListener, immediateNotify=True)
-with cond:
-    print("Waiting")
-    if not notified[0]:
-        cond.wait()
+#def connectionListener(connected,info):
+#    print(info, '; Connected=%s' % connected)
+#    with cond:
+#        notified[0] = True
+#        cond.notify()
+
+NetworkTables.initialize()
+ct = NetworkTables.getTable("SmartDashboard")
+#contoursTable = NetworkTablesInstance.getDefault().getTable("/vision/contours")
+#NetworkTablesInstance.addConnectionListener(connectionListener, immediateNotify=True)
+#with cond:
+#    print("Waiting")
+#    if not notified[0]:
+#        cond.wait()
 #sleep(0.1)
-table = NetworkTablesInstance.getTable("VisionTable")
+#table = NetworkTablesInstance.getTable("VisionTable")
 #NetworkTablesInstance.startServer()
 
-xEntry = table.getEntry("cx")
+#xEntry = table.getEntry("cx")
 
 #cv2 is OpenCV
 #When calling cv2 on the PI be sure to use python3 instead of pythen when launching
@@ -65,8 +68,9 @@ while True:
             cv2.circle(mediancopcop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
-        contoursTable.getEntry("cx").setDouble(cx)
-        xEntry.setDouble('cx', cx)
+        ct.putNumber("cx", cx)
+        # contoursTable.getEntry("cx").setDouble(cx)
+        #xEntry.setDouble('cx', cx)
     cv2.imshow('Final', mediancopcop)
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
