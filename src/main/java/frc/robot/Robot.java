@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.cameraserver.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +26,7 @@ public class Robot extends TimedRobot {
   private DriveSystem _drivesys;
   private OperatorInterface _opFace;
   private Intake _intake;
+
   NetworkTableInstance inst = NetworkTableInstance.getDefault();
   NetworkTable table = inst.getTable("VisionTable");
   NetworkTableEntry xEntry = table.getEntry("cx");
@@ -38,6 +40,7 @@ public class Robot extends TimedRobot {
     this._drivesys = new DriveSystem();
     this._opFace = new OperatorInterface();
     this._intake = new Intake();
+    CameraServer.getInstance().startAutomaticCapture();
   }
   double x = 0.0;
   double y = 0.0;

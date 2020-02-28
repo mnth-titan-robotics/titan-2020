@@ -3,13 +3,27 @@ import numpy as np
 from networktables import NetworkTable
 from networktables import NetworkTableEntry
 from networktables import NetworkTablesInstance
+import threading
 #from time import sleep
-rasp = NetworkTablesInstance.create()
+cond = threading.Condition()
+notified = [False]
+
+def connectionListener(connected,info):
+    print(info, '; Connected=%s' % connected)
+    with cond:
+        notified[0] = True
+        cond.notify()
+NetworkTablesInstance.initialize(, server="10.27.89.2")
+NetworkTablesInstance.addConnectionListener(connectionListener, immediateNotify=True)
+with cond:
+    print("Waiting")
+    if not notified[0]:
+        cond.wait()
 #sleep(0.1)
-table = NetworkTablesInstance.getDefault().getTable("VisionTable")
-NetworkTablesInstance.startServer()
-xEntry = NetworkTablesInstance.getEntry("cx")
-#sd.getTable
+table = NetworkTablesInstance.getTable("VisionTable")
+#NetworkTablesInstance.startServer()
+
+xEntry = table.getEntry("cx")
 
 #cv2 is OpenCV
 #When calling cv2 on the PI be sure to use python3 instead of pythen when launching
