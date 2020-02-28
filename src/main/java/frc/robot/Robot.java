@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
      // this._drivesys.setCommands(0.2, 0.0);
     //}
     this._drivesys.setCommands(1.0, 0.0);
-    
+    Wait(2000);
     this._drivesys.update();
     }
   @Override
