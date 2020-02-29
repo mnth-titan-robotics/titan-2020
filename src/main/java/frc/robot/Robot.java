@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
     //}
     balx = SmartDashboard.getNumber("cx", 0.0);
     this._drivesys.setCommands(1.0, 0.0);
-    
+    Wait(2000);
     this._drivesys.update();
     }
   @Override
