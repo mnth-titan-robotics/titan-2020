@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
     this._opFace = new OperatorInterface();
     this._intake = new Intake();
     CameraServer.getInstance().startAutomaticCapture();
-    NetworkTableInstance.getDefault().getTable("SmartDashboard");
+    NetworkTableInstance.getDefault().getTable("/SmartDashboard");
   }
   double x = 0.0;
   double y = 0.0;
@@ -87,6 +87,7 @@ public class Robot extends TimedRobot {
     //{
      // this._drivesys.setCommands(0.2, 0.0);
     //}
+    balx = SmartDashboard.getNumber("cx", 0.0);
     this._drivesys.setCommands(1.0, 0.0);
     
     this._drivesys.update();
