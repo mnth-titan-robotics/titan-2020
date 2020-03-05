@@ -76,6 +76,14 @@ public class OperatorInterface {
         this._turnCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
         this._upCmd = this._copilotJoy.getRawAxis(RobotConstants.AXIS_UPP);
         this._downCmd = this._copilotJoy.getRawAxis(RobotConstants.AXIS_LOW);
+        if(Math.abs(this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURB)) < 0.2){
+            RobotConstants.TURB = false;
+        }
+        else{
+            if(Math.abs(this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURB)) > 0.2){
+                RobotConstants.TURB = true;
+            }  
+        }
         
         if(Math.abs(this._driveCmd) < RobotConstants.DEADBAND){
             this._driveCmd = (0.0);

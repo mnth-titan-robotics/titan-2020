@@ -8,12 +8,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.cameraserver.*;
+import java.util.concurrent.TimeUnit;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -39,7 +43,8 @@ public class Robot extends TimedRobot {
     this._opFace = new OperatorInterface();
     this._intake = new Intake();
     CameraServer.getInstance().startAutomaticCapture();
-    NetworkTableInstance.getDefault().getTable("/SmartDashboard");
+    //NetworkTableInstance.getDefault().getTable("/SmartDashboard");
+    SmartDashboard.setDefaultNumber("cx", 0.0);
   }
   double x = 0.0;
   double y = 0.0;
@@ -72,6 +77,64 @@ public class Robot extends TimedRobot {
     this._drivesys.reset();
     this._opFace.reset();
     this._intake.reset();
+    this._drivesys.setCommands(0.3, 0.07);
+    this._intake.setCommands(0.0, 0.0);
+    this._intake.update();
+    this._drivesys.update();
+    try {
+    TimeUnit.MILLISECONDS.sleep(4000); 
+    } catch (Exception e) {
+      System.err.println("An InterruptedException was caught");
+    }
+    this._drivesys.setCommands(0.0, 0.0);
+    this._drivesys.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(1000); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._intake.setCommands(-0.3, 0.0);
+    this._intake.update();
+    this._drivesys.setCommands(0.2, 0);
+    this._drivesys.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(1250); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._intake.setCommands(0.2, -1.0);
+    this._intake.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(2000); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._drivesys.setCommands(-0.3, 0.0);
+    this._drivesys.update();
+    this._intake.setCommands(0.0, 0.0);
+    this._intake.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(1000); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._drivesys.setCommands(0.0, 1.0);
+    this._drivesys.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(3900); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._drivesys.setCommands(0.3, 0.0);
+    try {
+      TimeUnit.MILLISECONDS.sleep(1000); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._drivesys.setCommands(0.0, 0.0);
+    this._drivesys.update();
+    this._intake.setCommands(0.0, 0.0);
+    this._intake.update();
   }
 
   /**
@@ -87,9 +150,8 @@ public class Robot extends TimedRobot {
     //{
      // this._drivesys.setCommands(0.2, 0.0);
     //}
-    balx = SmartDashboard.getNumber("cx", 0.0);
-    this._drivesys.setCommands(1.0, 0.0);
-    Wait(2000);
+    //balx = SmartDashboard.getNumber("cx", 0.0);
+    this._drivesys.setCommands(0.0, 0.0);
     this._drivesys.update();
     }
   @Override

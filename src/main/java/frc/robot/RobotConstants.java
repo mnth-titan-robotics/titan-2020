@@ -1,5 +1,6 @@
 package frc.robot;
 
+
 public class RobotConstants {
     //Drive System
     public static final int MOTOR_CHANNEL_FL = 1;
@@ -26,8 +27,11 @@ public class RobotConstants {
     public static final int AXIS_UPP = 1;
     public static final int AXIS_LOW = 5;
 
+    public static final int AXIS_TURB = 3;
+    public static boolean TURB = false;
+
     //DeadBand
-    public static final double DEADBAND = 0.2;
+    public static final double DEADBAND = 0.05;
 
     //Vision
     public static final double XLOWER = 300;

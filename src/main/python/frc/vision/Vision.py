@@ -4,6 +4,8 @@ from networktables import NetworkTables
 from networktables import NetworkTableEntry
 from networktables import NetworkTablesInstance
 import threading
+import wpilib
+
 #from time import sleep
 cond = threading.Condition()
 notified = [False]
@@ -14,8 +16,10 @@ notified = [False]
 #        notified[0] = True
 #        cond.notify()
 
-NetworkTables.initialize()
-ct = NetworkTables.getTable("/SmartDashboard")
+#NetworkTables.initialize()
+#ct = NetworkTables.getTable("/SmartDashboard")
+#wpilib.SendableChooser.addOption("cx", )
+wpilib.SmartDashboard.
 #contoursTable = NetworkTablesInstance.getDefault().getTable("/vision/contours")
 #NetworkTablesInstance.addConnectionListener(connectionListener, immediateNotify=True)
 #with cond:
@@ -39,7 +43,7 @@ while True:
     lower_yel = np.array([20,0,100])
     upper_yel = np.array([30,150,225])
     #Mask filters for yellow without adding color to the view
-    mask = cv2.inRange(hsl, lower_yel, upper_yel)   
+    mask = cv2.inRange(hsl, lower_yel, upper_yel) 
     res = cv2.bitwise_and(frame,frame, mask= mask)
     gus = cv2.GaussianBlur(res,(5,5),0)
     #Res is adding defualt yellow to filtered objects
