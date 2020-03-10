@@ -19,7 +19,7 @@ notified = [False]
 #NetworkTables.initialize()
 #ct = NetworkTables.getTable("/SmartDashboard")
 #wpilib.SendableChooser.addOption("cx", )
-wpilib.SmartDashboard.
+#wpilib.SmartDashboard.
 #contoursTable = NetworkTablesInstance.getDefault().getTable("/vision/contours")
 #NetworkTablesInstance.addConnectionListener(connectionListener, immediateNotify=True)
 #with cond:

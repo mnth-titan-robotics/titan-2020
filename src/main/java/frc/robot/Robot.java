@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
     this._drivesys.reset();
     this._opFace.reset();
     this._intake.reset();
-    this._drivesys.setCommands(0.3, 0.07);
+    this._drivesys.setCommands(0.3, 0.06);
     this._intake.setCommands(0.0, 0.0);
     this._intake.update();
     this._drivesys.update();
@@ -166,6 +166,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     this._opFace.update();
+    this._drivesys.update();
     this._drivesys.setCommands(this._opFace.getDriveCmd(), this._opFace.getTurnCmd());
     this._intake.setCommands(this._opFace.getUpCmd(), this._opFace.getDownCmd());
     this._drivesys.update();

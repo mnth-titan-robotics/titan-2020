@@ -18,6 +18,14 @@ public class RobotConstants {
     public static final boolean MOTOR_VERT_INVERT_UL = false;
     public static final boolean MOTOR_VERT_INVERT_UR = false;
 
+    //Hang
+
+    public static final int MOTOR_CHANNEL_U = 6;
+
+    public static final boolean MOTOR_VERT_INVERT_U = false;
+
+    public static final int AXIS_VERT = 2;
+
     //Operator Interface
     public static final int JOYSTICK_PORT_PILOT = 0;
     public static final int JOYSTICK_PORT_COPILOT = 1;

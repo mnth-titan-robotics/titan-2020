@@ -7,6 +7,7 @@ public class OperatorInterface {
     private double _turnCmd;
     private double _upCmd;
     private double _downCmd;
+    private double _VertCmd;
 
     private Joystick _pilotJoy;
     private Joystick _copilotJoy;
@@ -37,6 +38,8 @@ public class OperatorInterface {
         this._turnCmd = 0.0;
         this._upCmd = 0.0;
         this._downCmd = 0.0;
+        this._VertCmd = 0.0;
+
     }
 
     /**
@@ -67,6 +70,10 @@ public class OperatorInterface {
     public double getDownCmd() {
         return this._downCmd;
     }
+
+    public double getVertCmd() {
+        return this._VertCmd;
+    }
     /**
      * Updates the member variables of this class based on the input(s) they are associated with on
      * the joysticks.
@@ -76,6 +83,8 @@ public class OperatorInterface {
         this._turnCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
         this._upCmd = this._copilotJoy.getRawAxis(RobotConstants.AXIS_UPP);
         this._downCmd = this._copilotJoy.getRawAxis(RobotConstants.AXIS_LOW);
+        this._VertCmd = this._copilotJoy.getRawAxis(RobotConstants.AXIS_VERT);
+
         if(Math.abs(this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURB)) < 0.2){
             RobotConstants.TURB = false;
         }
@@ -84,7 +93,18 @@ public class OperatorInterface {
                 RobotConstants.TURB = true;
             }  
         }
-        
+
+        //Hang mech
+        if(Math.abs(this._VertCmd) < RobotConstants.DEADBAND){
+            this._VertCmd = (-0.2);
+        }
+        if(Math.abs(this._VertCmd) > RobotConstants.DEADBAND){
+            this._VertCmd = this._VertCmd;
+        }
+
+
+
+
         if(Math.abs(this._driveCmd) < RobotConstants.DEADBAND){
             this._driveCmd = (0.0);
         }
