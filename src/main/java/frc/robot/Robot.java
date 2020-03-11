@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
   private DriveSystem _drivesys;
   private OperatorInterface _opFace;
   private Intake _intake;
+  private HangMech _HangMech;
   
 
 
@@ -159,6 +160,7 @@ public class Robot extends TimedRobot {
     this._drivesys.reset();
     this._opFace.reset();
     this._intake.reset();
+    this._HangMech.reset();
   }
   /**
    * This function is called periodically during operator control.
@@ -169,8 +171,10 @@ public class Robot extends TimedRobot {
     this._drivesys.update();
     this._drivesys.setCommands(this._opFace.getDriveCmd(), this._opFace.getTurnCmd());
     this._intake.setCommands(this._opFace.getUpCmd(), this._opFace.getDownCmd());
+    this._HangMech.setCommands(this._opFace.getVertCmd());
     this._drivesys.update();
     this._intake.update();
+    this._HangMech.update();
   }
 
   /**
@@ -181,6 +185,7 @@ public class Robot extends TimedRobot {
     this._drivesys.reset();
     this._opFace.reset();
     this._intake.reset();
+    this._HangMech.reset();
   }
   @Override
   public void disabledPeriodic() {
@@ -188,5 +193,7 @@ public class Robot extends TimedRobot {
     this._drivesys.update();
     this._intake.setCommands(0.0, 0.0);
     this._intake.update();
+    this._HangMech.setCommands(0.0);
+    this._HangMech.update();
   }
 }

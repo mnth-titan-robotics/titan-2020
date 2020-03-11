@@ -102,9 +102,6 @@ public class OperatorInterface {
             this._VertCmd = this._VertCmd;
         }
 
-
-
-
         if(Math.abs(this._driveCmd) < RobotConstants.DEADBAND){
             this._driveCmd = (0.0);
         }
