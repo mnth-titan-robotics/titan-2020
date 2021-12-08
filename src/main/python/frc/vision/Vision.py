@@ -20,7 +20,10 @@ notified = [False]
 #NetworkTables.initialize()
 #ct = NetworkTables.getTable("/SmartDashboard")
 #wpilib.SendableChooser.addOption("cx", )
-#wpilib.SmartDashboard.
+
+xEntry = wpilib.SmartDashboard.getTable("/SmartDashboard").getEntry("cx")
+#xEntry = wpilib.SmartDashboard.getEntry("cx")
+
 #contoursTable = NetworkTablesInstance.getDefault().getTable("/vision/contours")
 #NetworkTablesInstance.addConnectionListener(connectionListener, immediateNotify=True)
 #with cond:
@@ -60,7 +63,6 @@ while True:
     mediancop = median.copy()
     cv2.drawContours(mediancop,cnt,-1,(0,0,255), 2)
 
-
     #mediancopcop = cv2.medianBlur(mediancop,15)
 
     copyCnt= cnt
@@ -75,13 +77,14 @@ while True:
             Ballx = cx
             Bally = cy
             print(Ballx,Bally)
-
             cv2.circle(mediancop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
-        ct.putNumber("cx", cx)
+        #ct.putNumber("cx", cx)
         # contoursTable.getEntry("cx").setDouble(cx)
-        #xEntry.setDouble('cx', cx)
+        xEntry.setDouble("cx", cx)
+        xEntry.SendableChooser.setDouble("cx", cx)
+
     cv2.imshow('Final', mediancop)
 
     k = cv2.waitKey(5) & 0xFF
