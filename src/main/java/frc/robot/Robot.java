@@ -8,8 +8,16 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.cameraserver.*;
+import java.util.concurrent.TimeUnit;
+
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +29,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
   private DriveSystem _drivesys;
   private OperatorInterface _opFace;
+  private Intake _intake;
+  
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -29,7 +40,16 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     this._drivesys = new DriveSystem();
     this._opFace = new OperatorInterface();
+    this._intake = new Intake();
+    CameraServer.getInstance().startAutomaticCapture();
+    //NetworkTableInstance.getDefault().getTable("/SmartDashboard");
+    SmartDashboard.setDefaultNumber("cx", 0.0);
   }
+  double x = 0.0;
+  double y = 0.0;
+  double balx = 0.0;
+
+
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -57,6 +77,66 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     this._drivesys.reset();
     this._opFace.reset();
+    this._intake.reset();
+    this._drivesys.setCommands(0.3, 0.06);
+    this._intake.setCommands(0.0, 0.0);
+    this._intake.update();
+    this._drivesys.update();
+    try {
+    TimeUnit.MILLISECONDS.sleep(4000); 
+    } catch (Exception e) {
+      System.err.println("An InterruptedException was caught");
+    }
+    this._drivesys.setCommands(0.0, 0.0);
+    this._drivesys.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(1000); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._intake.setCommands(-0.3, 0.0);
+    this._intake.update();
+    this._drivesys.setCommands(0.2, 0);
+    this._drivesys.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(1250); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._intake.setCommands(0.2, -1.0);
+    this._intake.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(2000); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._drivesys.setCommands(-0.3, 0.0);
+    this._drivesys.update();
+    this._intake.setCommands(0.0, 0.0);
+    this._intake.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(1000); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._drivesys.setCommands(0.0, 1.0);
+    this._drivesys.update();
+    try {
+      TimeUnit.MILLISECONDS.sleep(3900); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._drivesys.setCommands(0.3, 0.0);
+    try {
+      TimeUnit.MILLISECONDS.sleep(1000); 
+      } catch (Exception e) {
+        System.err.println("An InterruptedException was caught");
+      }
+    this._drivesys.setCommands(0.0, 0.0);
+    this._drivesys.update();
+    this._intake.setCommands(0.0, 0.0);
+    this._intake.update();
+
   }
 
   /**
@@ -64,6 +144,21 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+
+    //xEntry.setDouble(balx);
+    //AutonSearch.middle(balx, x);
+    //AutonSearch.interpret(x, y);
+    //this._drivesys.setCommands(0.0, y);
+    //if(y == 0.0)
+    //{
+     // this._drivesys.setCommands(0.2, 0.0);
+    //}
+    //balx = SmartDashboard.getNumber("cx", 0.0);
+    this._drivesys.setCommands(0.0, 0.0);
+    this._drivesys.update();
+    }
+
+  /** This portion is enabled for autonomus modes
 
     double balx = 0.0; 
     double x = 0.0;
@@ -77,11 +172,14 @@ public class Robot extends TimedRobot {
     }
     this._drivesys.update();
     }
+end portion enabled in autonomus modes*/
 
   @Override
   public void teleopInit() {
     this._drivesys.reset();
     this._opFace.reset();
+    this._intake.reset();
+
   }
   /**
    * This function is called periodically during operator control.
@@ -89,8 +187,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     this._opFace.update();
-    this._drivesys.setCommands(this._opFace.getDriveCmd(), this._opFace.getTurnCmd());
+
     this._drivesys.update();
+    this._drivesys.setCommands(this._opFace.getDriveCmd(), this._opFace.getTurnCmd());
+    this._intake.setCommands(this._opFace.getUpCmd(), this._opFace.getDownCmd());
+    this._drivesys.update();
+    this._intake.update();
+
   }
 
   /**
@@ -100,10 +203,16 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     this._drivesys.reset();
     this._opFace.reset();
+
+    this._intake.reset();
+
   }
   @Override
   public void disabledPeriodic() {
     this._drivesys.setCommands(0.0, 0.0);
     this._drivesys.update();
+    this._intake.setCommands(0.0, 0.0);
+    this._intake.update();
+
   }
 }

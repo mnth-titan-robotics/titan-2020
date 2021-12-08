@@ -26,6 +26,7 @@ public class DriveSystem {
         this.reset();
     }
     public void reset() {
+        RobotConstants.TURB = false;
         this.setCommands(0.0, 0.0);
     }
 
@@ -39,12 +40,26 @@ public class DriveSystem {
     //left is drive - turn
     //right is drive + turn
     public void update() {
-        double leftTrn = Util.limit(this._driveCmd - this._turnCmd,-1.0, 1.0);
-        double rightTrn = Util.limit(this._driveCmd + this._turnCmd,-1.0, 1.0);
+        if(RobotConstants.TURB = false){
+            double leftTrn = Util.limit(this._driveCmd - this._turnCmd,-0.7, 0.7);
+            double rightTrn = Util.limit(this._driveCmd + this._turnCmd,-0.7, 0.7);
+    
+            this._motorFL.set(leftTrn);
+            this._motorFR.set(rightTrn);
+            this._motorRL.set(leftTrn);
+            this._motorRR.set(rightTrn);
+        }
+        else{
+            if(RobotConstants.TURB = true){
+                double leftTrn = Util.limit(this._driveCmd - this._turnCmd, -0.7, 0.7);
+                double rightTrn = Util.limit(this._driveCmd + this._turnCmd, -0.7, 0.7);
+    
+                this._motorFL.set(leftTrn);
+                this._motorFR.set(rightTrn);
+                this._motorRL.set(leftTrn);
+                this._motorRR.set(rightTrn);
+            }
+        }
 
-        this._motorFL.set(leftTrn);
-        this._motorFR.set(rightTrn);
-        this._motorRL.set(leftTrn);
-        this._motorRR.set(rightTrn);
     }
 }

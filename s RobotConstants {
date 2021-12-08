@@ -1,0 +1,85 @@
+[33mcommit 02ecc361333bef6f3ed9a57deabcdfc6c794f43f[m[33m ([m[1;36mHEAD -> [m[1;32mMuleTesting[m[33m, [m[1;31morigin/OperatorInterface[m[33m, [m[1;32mOperatorInterface[m[33m)[m
+Author: bohdi00707 <nathanhowea@gmail.com>
+Date:   Sat Jan 25 13:40:15 2020 -0600
+
+    Updating Robot Constants
+
+[33mcommit c9de8deca98da09bd818dfdc3934e3a055f3767e[m
+Author: bohdi00707 <nathanhowea@gmail.com>
+Date:   Sat Jan 25 13:39:16 2020 -0600
+
+    Wrote OperatorInterface code
+
+[33mcommit 19405e86ebb108dc410c12bce3cc3266dc80873b[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: bohdi00707 <43555313+bohdi00707@users.noreply.github.com>
+Date:   Thu Jan 23 14:46:53 2020 -0600
+
+    Resolved errors (#8)
+    
+    * Finished day 1 Template setup
+    
+    * Fixed Variables Names
+    
+    * Latest Version
+    
+    * Resolved errors
+    
+    * Comment Issues Fixed
+
+[33mcommit c529a791d79ca358353fb04bfd31feb021f5a838[m
+Author: kchenweijie <kevin.chen.weijie@utexas.edu>
+Date:   Sun Jan 19 22:50:54 2020 -0600
+
+    Assignment01 (#6)
+    
+    * drive system annotated
+    
+    * save
+    
+    * moved a hint
+
+[33mcommit d2028fa4d25b2a30de86bf11becd2153f408bca1[m
+Author: bohdi00707 <43555313+bohdi00707@users.noreply.github.com>
+Date:   Sun Jan 19 21:25:24 2020 -0600
+
+    Finished day 1 Template setup (#5)
+    
+    * Finished day 1 Template setup
+    
+    * moved up .gitignore
+    
+    * bubble everything up
+    
+    * everything is set up
+    
+    * everything building
+    
+    Co-authored-by: kchenweijie <kevin.chen.weijie@utexas.edu>
+
+[33mcommit edd10a7e0e4e88b392ecf7f7d927789e819e4316[m
+Author: bohdi00707 <43555313+bohdi00707@users.noreply.github.com>
+Date:   Sat Jan 18 14:22:49 2020 -0600
+
+    Save (#4)
+
+[33mcommit d7849adb318708e477f687ce70da7662312cb72d[m
+Author: kchenweijie <kevin.chen.weijie@utexas.edu>
+Date:   Sat Jan 18 12:31:10 2020 -0600
+
+    updated gitignore to be for python (#2)
+
+[33mcommit 35019e7e1e1fea66ebd6aa60d5d9bf42b8c30bdb[m
+Author: kchenweijie <kevin.chen.weijie@utexas.edu>
+Date:   Sat Jan 18 12:26:14 2020 -0600
+
+    save (#1)
+    
+    * save
+    
+    * Save
+
+[33mcommit 12e0748a895c7c653f691baf505e38fb4a6f6879[m
+Author: mnth-titan-robotics <35546809+mnth-titan-robotics@users.noreply.github.com>
+Date:   Sat Jan 18 12:08:08 2020 -0600
+
+    Initial commit

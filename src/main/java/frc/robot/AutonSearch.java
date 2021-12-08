@@ -2,6 +2,8 @@
 
 package frc.robot;
 
+
+
 public class AutonSearch {
     public static double middle(double balx, double cmd)
     {
