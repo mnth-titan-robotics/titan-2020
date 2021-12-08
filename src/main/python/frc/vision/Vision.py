@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+
 from networktables import NetworkTables
 from networktables import NetworkTableEntry
 from networktables import NetworkTablesInstance
@@ -34,11 +35,13 @@ notified = [False]
 
 #cv2 is OpenCV
 #When calling cv2 on the PI be sure to use python3 instead of pythen when launching
+
 cap = cv2.VideoCapture(0)
 while True:
     _, frame = cap.read()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     hsl = cv2.cvtColor(frame, cv2.COLOR_BGR2HLS)
+
     #BGR Values V V V
     lower_yel = np.array([20,0,100])
     upper_yel = np.array([30,150,225])
@@ -52,11 +55,14 @@ while True:
     mask2 = cv2.inRange(median, lower_yel, upper_yel)
     #Contour Center Detection
     cnt, hierarchy = cv2.findContours(mask2, cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+
     cnt = sorted(cnt, key = cv2.contourArea, reverse = True)
     mediancop = median.copy()
     cv2.drawContours(mediancop,cnt,-1,(0,0,255), 2)
 
+
     #mediancopcop = cv2.medianBlur(mediancop,15)
+
     copyCnt= cnt
     if len(copyCnt) == 0:
         print("No Contours")
@@ -69,6 +75,7 @@ while True:
             Ballx = cx
             Bally = cy
             print(Ballx,Bally)
+
             cv2.circle(mediancop, (cx, cy), 5, (255,0,0), thickness=5, lineType=8, shift=0)
         else:
             cx, cy = 0,0
@@ -76,8 +83,11 @@ while True:
         # contoursTable.getEntry("cx").setDouble(cx)
         #xEntry.setDouble('cx', cx)
     cv2.imshow('Final', mediancop)
+
     k = cv2.waitKey(5) & 0xFF
     if k == 27:
         break
 cv2.destroyAllWindows()
+
 cap.release()
+

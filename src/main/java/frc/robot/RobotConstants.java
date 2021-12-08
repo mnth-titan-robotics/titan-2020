@@ -12,6 +12,7 @@ public class RobotConstants {
     public static final boolean MOTOR_DRIVE_INVERT_R = true;
 
     //Intake
+
     public static final int MOTOR_CHANNEL_UL = 7;
     public static final int MOTOR_CHANNEL_UR = 8;
 
@@ -26,12 +27,14 @@ public class RobotConstants {
 
     public static final int AXIS_VERT = 2;
 
+
     //Operator Interface
     public static final int JOYSTICK_PORT_PILOT = 0;
     public static final int JOYSTICK_PORT_COPILOT = 1;
 
     public static final int AXIS_DRIVE = 1;
     public static final int AXIS_TURN = 4;
+
     public static final int AXIS_UPP = 1;
     public static final int AXIS_LOW = 5;
 
@@ -44,5 +47,6 @@ public class RobotConstants {
     //Vision
     public static final double XLOWER = 300;
     public static final double XUPPER = 350;
+
 }
     

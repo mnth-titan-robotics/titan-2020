@@ -32,7 +32,6 @@ public class Robot extends TimedRobot {
   private Intake _intake;
   
 
-
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -49,6 +48,8 @@ public class Robot extends TimedRobot {
   double x = 0.0;
   double y = 0.0;
   double balx = 0.0;
+
+
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -135,6 +136,7 @@ public class Robot extends TimedRobot {
     this._drivesys.update();
     this._intake.setCommands(0.0, 0.0);
     this._intake.update();
+
   }
 
   /**
@@ -142,6 +144,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+
     //xEntry.setDouble(balx);
     //AutonSearch.middle(balx, x);
     //AutonSearch.interpret(x, y);
@@ -154,11 +157,29 @@ public class Robot extends TimedRobot {
     this._drivesys.setCommands(0.0, 0.0);
     this._drivesys.update();
     }
+
+  /** This portion is enabled for autonomus modes
+
+    double balx = 0.0; 
+    double x = 0.0;
+    double y = 0.0;
+    AutonSearch.middle(balx, x);
+    AutonSearch.interpret(x, y);
+    this._drivesys.setCommands(0.0, y);
+    if(y == 0.0)
+    {
+      this._drivesys.setCommands(0.1, 0.0);
+    }
+    this._drivesys.update();
+    }
+end portion enabled in autonomus modes*/
+
   @Override
   public void teleopInit() {
     this._drivesys.reset();
     this._opFace.reset();
     this._intake.reset();
+
   }
   /**
    * This function is called periodically during operator control.
@@ -166,11 +187,13 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     this._opFace.update();
+
     this._drivesys.update();
     this._drivesys.setCommands(this._opFace.getDriveCmd(), this._opFace.getTurnCmd());
     this._intake.setCommands(this._opFace.getUpCmd(), this._opFace.getDownCmd());
     this._drivesys.update();
     this._intake.update();
+
   }
 
   /**
@@ -180,7 +203,9 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     this._drivesys.reset();
     this._opFace.reset();
+
     this._intake.reset();
+
   }
   @Override
   public void disabledPeriodic() {
@@ -188,5 +213,6 @@ public class Robot extends TimedRobot {
     this._drivesys.update();
     this._intake.setCommands(0.0, 0.0);
     this._intake.update();
+
   }
 }
