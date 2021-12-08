@@ -17,7 +17,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.cameraserver.*;
 import java.util.concurrent.TimeUnit;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -30,8 +29,6 @@ public class Robot extends TimedRobot {
   private OperatorInterface _opFace;
   private Intake _intake;
   private HangMech _HangMech;
-  
-
 
   /**
    * This function is run when the robot is first started up and should be
@@ -49,6 +46,7 @@ public class Robot extends TimedRobot {
   double x = 0.0;
   double y = 0.0;
   double balx = 0.0;
+
   /**
    * This function is called every robot packet, no matter the mode. Use
    * this for items like diagnostics that you want ran during disabled,
@@ -154,12 +152,31 @@ public class Robot extends TimedRobot {
     this._drivesys.setCommands(0.0, 0.0);
     this._drivesys.update();
     }
+
+
+  /** This portion is enabled for autonomus modes
+
+    double balx = 0.0; 
+    double x = 0.0;
+    double y = 0.0;
+    AutonSearch.middle(balx, x);
+    AutonSearch.interpret(x, y);
+    this._drivesys.setCommands(0.0, y);
+    if(y == 0.0)
+    {
+      this._drivesys.setCommands(0.1, 0.0);
+    }
+    this._drivesys.update();
+    }
+end portion enabled in autonomus modes*/
+
   @Override
   public void teleopInit() {
     this._drivesys.reset();
     this._opFace.reset();
     this._intake.reset();
     this._HangMech.reset();
+
   }
   /**
    * This function is called periodically during operator control.

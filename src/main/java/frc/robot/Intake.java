@@ -15,6 +15,7 @@ public class Intake {
 
         this._motorUL.setInverted(RobotConstants.MOTOR_VERT_INVERT_UL);
         this._motorUR.setInverted(RobotConstants.MOTOR_VERT_INVERT_UR);
+
     }
     public void reset() {
         this.setCommands(0.0, 0.0);

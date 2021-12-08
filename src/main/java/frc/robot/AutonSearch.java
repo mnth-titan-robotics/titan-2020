@@ -1,6 +1,6 @@
 //Near the middle is around 300 - 350 pixels
-package frc.robot;
 
+package frc.robot;
 
 public class AutonSearch {
     public static double middle(double balx, double cmd)

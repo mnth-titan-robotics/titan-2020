@@ -9,6 +9,11 @@ public class OperatorInterface {
     private double _downCmd;
     private double _VertCmd;
 
+    private double _upCmd;
+    private double _downCmd;
+    private double _VertCmd;
+
+
     private Joystick _pilotJoy;
     private Joystick _copilotJoy;
 
@@ -39,7 +44,6 @@ public class OperatorInterface {
         this._upCmd = 0.0;
         this._downCmd = 0.0;
         this._VertCmd = 0.0;
-
     }
 
     /**
@@ -74,6 +78,7 @@ public class OperatorInterface {
     public double getVertCmd() {
         return this._VertCmd;
     }
+
     /**
      * Updates the member variables of this class based on the input(s) they are associated with on
      * the joysticks.
@@ -127,6 +132,26 @@ public class OperatorInterface {
             this._downCmd = this._downCmd;
         }
     }
+
+        /** old hang code
+        this._upCmd = this._copilotJoy.getRawButton(RobotConstants.AXIS_UPP);
+        this._downCmd = this._copilotJoy.getRawButton(RobotConstants.AXIS_LOW);
+        
+        if(Math.abs(this._driveCmd) < RobotConstants.DEADBAND){
+            this._driveCmd = (0.0);
+        }
+        else{
+            this._driveCmd = this._driveCmd;
+        }
+        if(Math.abs(this._turnCmd) < RobotConstants.DEADBAND){
+            this._turnCmd = (0.0);
+        }
+        else{
+            this._turnCmd = this._turnCmd;
+        }
+    }
+    old hang code*/
+
 
         //We will be inverting the RawAxis to set a standard for how the robot drives:
         //By default forward on the joystick is negative, and we want that to be positive, same with left and right. We want them reversed
