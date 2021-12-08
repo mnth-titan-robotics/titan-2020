@@ -62,6 +62,19 @@ public class OperatorInterface {
     public void update() {
         this._driveCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_DRIVE);
         this._turnCmd = -this._pilotJoy.getRawAxis(RobotConstants.AXIS_TURN);
+        if(Math.abs(this._driveCmd) < RobotConstants.DEADBAND){
+            this._driveCmd = (0.0);
+        }
+        else{
+            this._driveCmd = this._driveCmd;
+        }
+        if(Math.abs(this._turnCmd) < RobotConstants.DEADBAND){
+            this._turnCmd = (0.0);
+        }
+        else{
+            this._turnCmd = this._turnCmd;
+        }
+    }
 
         //We will be inverting the RawAxis to set a standard for how the robot drives:
         //By default forward on the joystick is negative, and we want that to be positive, same with left and right. We want them reversed
@@ -71,5 +84,4 @@ public class OperatorInterface {
         // The joysticks we will be using are as follows (both on the pilot controller):
         //      drive - left stick y-axis
         //      turn - right stick x-axis
-    }
 }
